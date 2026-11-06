@@ -55,6 +55,8 @@ table.mx{border-collapse:separate;border-spacing:0;width:100%;min-width:980px}
 .rk{display:inline-block;min-width:40px;text-align:center;padding:1px 8px;border-radius:11px;font-weight:800;font-size:12.5px;margin-bottom:4px}
 .rk1{background:#1f6b45;color:#fff}.rk2{background:#cfe9d8;color:#1f5a3a}.rk3{background:#eef0f2;color:#4a5866}.rk4{background:#f8e3cf;color:#8a4b12}.rk5{background:#a33a3a;color:#fff}
 .mx thead th .tot{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin-bottom:4px}.mx thead th .tot b{color:var(--ink);font-size:15px}.mx thead th .tot .rk{margin:0 4px 0 0}.mx thead th .tot small{display:inline;font-size:11.5px}
+@media(max-width:700px){.mx tbody th small{display:none}.mx tbody th .rng{font-size:11px}.mx td[data-k] .small{display:none}.mx td[data-k]::after{opacity:1;position:static;display:block;margin-top:4px}table.mx{min-width:720px}}
+.cbar{margin:6px 0 16px}.cbar-legend{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:12px;color:var(--muted);margin-bottom:8px}.cbar-legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px;vertical-align:-1px}.cbar-row{display:grid;grid-template-columns:88px 1fr 48px;gap:8px;align-items:center;margin:5px 0;font-size:13.5px}.cbar-track{display:flex;height:18px;border-radius:4px;overflow:hidden;background:#eef1f4}.cbar-track i{display:block;height:100%}.cbar-row b{text-align:right}
 .mx td[data-k]{cursor:pointer;position:relative}.mx td[data-k]:hover{background:#f4f8fa}.mx td[data-k]:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
 .mx td[data-k]::after{content:'자세히 ›';position:absolute;right:10px;bottom:8px;font-size:11px;color:var(--accent);opacity:0;transition:opacity .15s}.mx td[data-k]:hover::after{opacity:1}
 #celldlg{width:min(680px,94vw);max-height:88vh;padding:0;border:0;border-radius:14px;box-shadow:0 20px 60px #0004}
@@ -605,6 +607,14 @@ setTerm(TERM);
  h+=`<tr class="tot"><td>중심 예산</td>`+tot.map(x=>`<td>${x.toLocaleString()}</td>`).join('')+'</tr>';
  h+=`<tr><td>계획 범위</td>`+rng.map(x=>`<td>${x}</td>`).join('')+'</tr></tbody>';
  document.getElementById('costtbl').innerHTML=h;
+ // 항목별 누적 막대
+ const PAL=['#255e73','#6f9a7c','#c2a14a','#9a7bb0','#7f8c99','#c27a2c','#cfd6dc'];
+ const num=v=>typeof v==='number'?v:parseInt(String(v).replace(/[^0-9]/g,''),10);
+ const maxT=Math.max(...tot);
+ const order=cols.map((c,i)=>i).sort((a,b)=>tot[a]-tot[b]);
+ let g='<div class="cbar-legend">'+rows.map((r,i)=>`<span><i style="background:${PAL[i]}"></i>${r[0]}</span>`).join('')+'</div>';
+ g+=order.map(i=>`<div class="cbar-row"><span class="cbar-n">${cols[i]}</span><span class="cbar-track">${rows.map((r,k)=>{const v=num(r[1][i]);return `<i style="width:${v/maxT*100}%;background:${PAL[k]}" title="${r[0]} ${v.toLocaleString()}만 원"></i>`}).join('')}</span><b>${tot[i].toLocaleString()}</b></div>`).join('');
+ document.getElementById('costtbl').closest('.mx-wrap').insertAdjacentHTML('beforebegin',`<div class="cbar" aria-label="학교별 1인 예산 구성">${g}<p class="small">1인 중심 예산(만 원)을 싼 순서로 놓았다. 막대 위에 마우스를 올리면 항목별 금액이 보인다.</p></div>`);
 })();
 </script>
 </body>

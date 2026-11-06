@@ -6,6 +6,10 @@
    if(!head||head.cells.length<3||table.querySelector('[rowspan]'))return;
    const labels=[...head.cells].map(cell=>cell.textContent.replace(/\s+/g,' ').trim());
    if(![...head.cells].every(cell=>cell.tagName==='TH')||[...head.cells].some(cell=>cell.colSpan!==1))return;
+   // 짧은 숫자·기호 위주 표는 카드로 바꾸면 세로로만 길어지므로 표 그대로 두고 좌우로 넘긴다
+   const lens=[...table.querySelectorAll('td,th')].map(c=>c.textContent.replace(/\s+/g,' ').trim().length);
+   const avg=lens.reduce((a,b)=>a+b,0)/Math.max(lens.length,1), max=Math.max(0,...lens);
+   if(max<=34||(avg<=16&&head.cells.length<=6)){table.classList.add('compact-table');return;}
    table.dataset.mobileReady='true';table.classList.add('mobile-cards');table.setAttribute('role','table');
    if(table.parentElement.classList.contains('tw'))table.parentElement.classList.add('mobile-cards-wrap');
    head.classList.add('mobile-table-head');
