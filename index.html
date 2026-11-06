@@ -142,7 +142,7 @@ footer{padding:30px 0 40px;font-size:13px;color:var(--muted)}
   <div class="meta">자료 확인 2026-11-07 · 비용은 장학금 차감 전 1인 계획 예산 · 기준은 각 대학 공식 자료와 단국대 모집표·파견후기</div>
 </div></header>
 <nav class="tabs"><div class="wrap">
-  <div class="navlinks"><a href="#verdict">지금 판단</a><a href="#matrix">기준별 비교</a><a href="#courses">들을 수 있는 과목</a><a href="#browse">과목 찾기</a><a href="#cards">대학별 요약</a><a href="#conditions">순위를 바꾸는 조건</a><a href="#weights">내 기준으로 보기</a><a href="#budget">비용</a><a href="#timeline">일정</a><a href="#more">상세 자료</a></div>
+  <div class="navlinks"><a href="#verdict">지금 판단</a><a href="#matrix">기준별 비교</a><a href="#courses">들을 수 있는 과목</a><a href="#browse">과목 찾기</a><a href="#cards">대학별 요약</a><a href="#conditions">순위를 바꾸는 조건</a><a href="#weights">내 기준으로 보기</a><a href="#budget">비용</a><a href="housing.html">함께 살기</a><a href="#timeline">일정</a><a href="#more">상세 자료</a></div>
   <div class="termsw" role="group" aria-label="파견 학기"><span>파견 학기</span><button type="button" data-t="spring" aria-pressed="true">1학기·봄</button><button type="button" data-t="fall" aria-pressed="false">2학기·가을</button></div>
 </div></nav>
 
@@ -213,11 +213,12 @@ footer{padding:30px 0 40px;font-size:13px;color:var(--muted)}
   <div class="scores" id="scores"></div>
 </section>
 
+<aside class="housing-guide-link" style="padding:16px 18px;border:1px solid var(--line,#ddd);border-radius:8px;margin:18px 0"><b>같은 방·같은 아파트로 신청하는 방법</b><p>학교마다 상호 지명, 그룹 초대, 자리 선택 방식이 다르다. 같은 방을 못 받았을 때의 대안과 둘 합계 비용을 별도 안내에 모았다.</p><a href="housing.html">5개 대학 공동거주 신청·대안 보기 →</a></aside>
 <section id="budget">
   <h2>비용 (1인, 만 원)</h2>
   <p class="lead">공식 숙소 요금과 계획용 추정 지출을 합한 값이다. 단국대 등록금, 큰 여행, 장학금은 빠져 있다. 둘이 가면 각자 금액을 더한다.</p>
   <div class="mx-wrap"><table class="cost" id="costtbl"></table></div>
-  <p class="small">환산 기준 USD 1,350 · AUD 950 · CAD 970 · GBP 2,000원. SOU는 1쿼터(약 3개월), 나머지는 한 학기(약 4개월). * Edge Hill 숙소 칸은 기숙사+식사 패키지(£2,960)이고 정착·생활용품 40만 원은 교통·통신·정착에 합쳤다. Edge Hill은 2026 봄 후기의 숙식 패키지(£2,960)를 바탕으로 한 가이드북 모델이며, 다른 대학과 항목 구분이 조금 다르다.</p>
+  <p class="small">환산 기준 USD 1,350 · AUD 950 · CAD 970 · GBP 2,000원. SOU는 1쿼터(약 3개월), 나머지는 한 학기(약 4개월). * Edge Hill 숙소 칸은 기숙사+식사 패키지(£2,960)이고 정착·생활용품 40만 원은 교통·통신·정착에 합쳤다. Edge Hill은 2026 봄 후기의 숙식 패키지(£2,960)를 바탕으로 한 가이드북 모델이며, 다른 대학과 항목 구분이 조금 다르다. Newcastle 숙소비는 신청비·커뮤니티비를 포함한 438만 원으로 맞췄다. CPP의 이 표는 UHS 숙식 기준이며, 새로 확인한 Village 월세와 식비 별도 비교는 <a href="housing.html#cpp">공동거주 안내</a>에서 볼 수 있다.</p>
 </section>
 
 <section id="timeline">
@@ -263,7 +264,7 @@ const U=[
  {id:'cpp',name:'CPP',full:'Cal Poly Pomona',loc:'미국 · 캘리포니아 포모나',c:'#976121',rank:4,cost:'2,099',range:'1,900–2,200',term:'한 학기 · 약 4개월',
   pros:['날씨가 따뜻함','성·관계 관련 후보 과목 다수, Pride Center'],
   cons:['예산을 크게 넘음(약 2,100만)','관련 과목 상당수가 온라인 분반']},
- {id:'ncl',name:'Newcastle',full:'University of Newcastle, Australia',loc:'호주 · 뉴캐슬',guide:'newcastle.html',c:'#2f6f86',rank:5,cost:'1,500',range:'1,500–1,650',term:'한 학기 · 약 4개월',
+ {id:'ncl',name:'Newcastle',full:'University of Newcastle, Australia',loc:'호주 · 뉴캐슬',guide:'newcastle.html',c:'#2f6f86',rank:5,cost:'1,538',range:'1,500–1,650',term:'한 학기 · 약 4개월',
   pros:['둘이 쓰는 커플 스튜디오(전용 주방·욕실)','모집 2자리가 가장 꾸준함','2~6월 늦여름~가을 날씨'],
   cons:['성·젠더 심리 과목은 온라인 · 봄 모듈 확인 필요','비용 1,500만 원대']},
 ];
@@ -275,7 +276,7 @@ const G=[
   {k:'cost',t:'비용',s:'1인 계획 예산',r:[0,20],imp:'계획 자체를 흔듦',v:{
    edge:[20,'약 1,212만','가장 저렴 · 숙식 패키지 £2,960 기준'],
    upei:[20,'약 1,226만','Edge Hill과 14만 원 차이라 체감은 같음'],
-   ncl:[14,'약 1,500만','가장 싼 곳보다 약 290만 원 더'],
+   ncl:[14,'약 1,538만','Bara 2인실 신청·커뮤니티비 포함 · 가장 싼 곳보다 약 330만 원 더'],
    sou:[10,'약 1,626만','약 410만 원 더 드는데 체류는 3개월(1쿼터)'],
    cpp:[4,'약 2,099만','약 890만 원 더 · 자금 계획을 새로 짜야 하는 수준']},
    f:{sou:[10,'약 1,626만','약 410만 원 더 드는데 체류는 가을쿼터 3개월']}},
@@ -308,11 +309,11 @@ const G=[
    upei:[7,'보장 안 됨','PEI 주택난 · 늦으면 한겨울에 교외 숙소를 직접 구해야 함']},
    f:{upei:[7,'보장 안 됨','PEI 주택난 · 늦으면 교외 숙소를 직접 구해야 함']}},
   {k:'house',t:'같이 살기',s:'둘이 함께 지낼 수 있는 구조',r:[6,20],imp:'매일의 생활',v:{
-   ncl:[19,'커플 스튜디오 약 32㎡','둘만 쓰는 주방·욕실 · 더블베드 선택 가능'],
-   upei:[17,'Blanchard 2인 아파트','각자 침실 + 둘만 쓰는 거실·주방·욕실 · 같은 아파트 배정은 미확정'],
-   sou:[14,'Shasta 2인실(같은 방)','성별 구분 없는 룸메이트 그룹 신청 경로 있음 · 욕실은 약 4명이 공유'],
-   cpp:[13,'UHS 2인 침실','성별 포괄 주거는 Village 쪽(가격 미확인) · 식사 상품 의무'],
-   edge:[9,'각자 1인실 · 보통 6인 플랫','같은 플랫 요청은 해볼 수 있지만 규정 없음 · 손님은 연속 2박까지 · 캠퍼스가 작아 오가기는 쉬움']}},
+   ncl:[19,'2인 스튜디오 · 서로 지명','같은 침실은 신청 때 연결 · 각자 침실은 같은 residence 수락 뒤 Housemate Request'],
+   upei:[17,'Blanchard · 상호 룸메이트 요청','각자 침실 + 둘만 주방·욕실 · 안 되면 PAC 2-bedroom · 최종 유닛 확인'],
+   sou:[14,'Shasta 2인실 · 룸메이트 그룹','그룹의 빠른 시간대에 함께 선택 · 대안은 같은 스위트 개인실 · Winter 절차 확인'],
+   cpp:[13,'Village / UHS 별도 절차','Village는 같은 유닛 자리 선택(월 $963/1,190) · UHS는 그룹 초대·수락 · 양쪽 GIH'],
+   edge:[9,'각자 1인실 · 같은 주방 요청','학교 배정 전 두 지원번호로 개별 문의 · 실패 시 같은 건물/인접 건물 · 공식 그룹 제도 미확인']}},
   {k:'weather',t:'날씨',s:'놀러 다니기 좋은 정도 · 파견 기간 전체',r:[6,18],imp:'기분·나들이, 혹한이면 일상까지',v:{
    cpp:[18,'1월 약 20℃ / 6℃','건조하고 맑은 날이 많아 언제든 나가기 좋음'],
    ncl:[16,'2월 약 27℃ → 6월 18℃','늦여름 해변에서 가을로 · 가을엔 비 오는 날이 늘어남'],
@@ -510,7 +511,7 @@ setTerm(TERM);
 (function(){
  const cols=['UPEI','Edge Hill','SOU','CPP','Newcastle'];
  const rows=[
-  ['숙소(·식사 상품)',[406,'592*',746,1049,400]],
+  ['숙소(·식사 상품)',[406,'592*',746,1049,438]],
   ['추가 식비',[160,140,60,180,180]],
   ['왕복 항공',[230,180,220,170,170]],
   ['비자·보험·부대비·교재',[100,30,280,280,325]],
@@ -518,7 +519,7 @@ setTerm(TERM);
   ['어학시험',[70,20,70,70,70]],
   ['예비비·인상 여유',[150,150,150,200,255]],
  ];
- const tot=[1226,1212,1626,2099,1500], rng=['1,200–1,350','1,100–1,350','1,500–1,700','1,900–2,200','1,500–1,650'];
+ const tot=[1226,1212,1626,2099,1538], rng=['1,200–1,350','1,100–1,350','1,500–1,700','1,900–2,200','1,500–1,650'];
  let h='<thead><tr><th>항목</th>'+cols.map(c=>`<th>${c}</th>`).join('')+'</tr></thead><tbody>';
  for(const [n,v] of rows) h+=`<tr><td>${n}</td>`+v.map(x=>`<td>${typeof x==='number'?x.toLocaleString():x}</td>`).join('')+'</tr>';
  h+=`<tr class="tot"><td>중심 예산</td>`+tot.map(x=>`<td>${x.toLocaleString()}</td>`).join('')+'</tr>';

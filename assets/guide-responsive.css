@@ -1,0 +1,47 @@
+/* Narrow screens: read descriptive tables one record at a time. */
+.housing-guide-link{padding:16px 18px;border:1px solid var(--line,#dbe2e9);border-left:4px solid var(--brand,var(--accent,#255e73));border-radius:6px;background:var(--soft,#f3f7f8);margin:16px 0;line-height:1.75}
+.housing-guide-link p{margin:6px 0}
+.housing-guide-link a{font-weight:700}
+.housing-guide-link a,.together-page a{overflow-wrap:anywhere}
+.housing-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin:16px 0}
+.housing-option{border:1px solid var(--line,#dbe2e9);border-radius:8px;padding:17px 19px;min-width:0;background:var(--paper,#fff)}
+.housing-option h3,.housing-option h4{margin:0 0 8px}
+.housing-option p{margin:6px 0}
+.housing-option .room-kind{font-size:13px;color:var(--muted,#5b6a7b)}
+.housing-steps{padding-left:23px}
+.housing-steps li{padding:3px 0 8px}
+.housing-fallback{padding:14px 18px;border-left:3px solid #a48244;background:#faf7ef;margin:14px 0}
+.housing-fallback p{margin:6px 0}
+.housing-source{font-size:13px;line-height:1.8;color:var(--muted,#5b6a7b)}
+.housing-source a{margin-right:10px}
+.housing-note{font-size:13px;line-height:1.8;color:var(--muted,#5b6a7b)}
+.room-diagrams{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+.room-diagram{padding:16px;border:1px solid var(--line,#dbe2e9);border-radius:8px;min-width:0;background:var(--paper,#fff)}
+.room-diagram h3{margin:0 0 12px;font-size:17px}
+.room-diagram p{margin:10px 0 0;font-size:14px}
+.unit-outline{border:2px solid #809eaa;padding:10px;border-radius:6px;display:grid;grid-template-columns:1fr 1fr;gap:8px;min-height:106px}
+.unit-outline .bedroom{border:1px solid #a9bbc3;border-radius:4px;background:#eaf1f4;padding:10px;text-align:center;line-height:1.55;font-size:14px}
+.unit-outline .shared{grid-column:1/-1;text-align:center;font-size:12px;color:#415a65;background:#f1f4f5;padding:5px}
+.unit-outline .wide{grid-column:1/-1}
+.together-jumps{display:flex;flex-wrap:wrap;gap:9px;margin:18px 0}
+.together-jumps a{border:1px solid var(--line,#dbe2e9);border-radius:5px;padding:6px 12px;text-decoration:none;background:var(--paper,#fff)}
+.together-school{scroll-margin-top:70px}
+@media(max-width:720px){
+ .housing-options,.room-diagrams{grid-template-columns:1fr}
+ .housing-option{padding:16px}
+ .tw.mobile-cards-wrap{overflow:visible;max-width:100%;min-width:0}
+ table.wt.mobile-cards{display:block;width:100%;min-width:0!important;max-width:100%;border:0;border-collapse:separate;font-size:14px;line-height:1.75}
+ .mobile-cards>thead{display:block;position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+ .mobile-cards>tbody,.mobile-cards>tfoot{display:block;width:100%}
+ .mobile-cards .mobile-table-head{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+ table.wt.mobile-cards tr:not(.mobile-table-head){display:block;margin:0 0 14px;width:100%;border:1px solid var(--line,#dbe2e9);border-radius:8px;overflow:hidden;background:var(--paper,#fff)}
+ table.wt.mobile-cards tr:not(.mobile-table-head)>td,table.wt.mobile-cards tr:not(.mobile-table-head)>th{display:block;position:static;box-sizing:border-box;width:auto!important;min-width:0!important;max-width:none;padding:10px 14px;border:0;border-top:1px solid var(--line,#dbe2e9);background:transparent;text-align:left;white-space:normal!important;word-break:normal;overflow-wrap:anywhere;color:inherit;font-size:14px;line-height:1.75}
+ table.wt.mobile-cards tr:not(.mobile-table-head)>:first-child{border-top:0;background:var(--thbg,#eaf1f4);font-weight:700;font-size:15px}
+ table.wt.mobile-cards tr:not(.mobile-table-head)>[data-label]::before{content:attr(data-label);display:block;font-size:12px;font-weight:700;color:var(--muted,#5b6a7b);line-height:1.5;margin-bottom:4px}
+ table.wt.mobile-cards tr:not(.mobile-table-head)>:first-child::before{display:none}
+ table.wt.mobile-cards .money{white-space:normal;display:block}
+ .housing-guide-link{padding:14px}
+}
+@media(prefers-color-scheme:dark){
+ .housing-fallback{background:color-mix(in srgb,currentColor 5%,transparent)}
+}
