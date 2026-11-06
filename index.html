@@ -184,7 +184,7 @@ footer{padding:30px 0 40px;font-size:13px;color:var(--muted)}
   <p class="small">핵심 = 성·젠더·관계를 직접 다룸 · 인접 = 일부 겹침 · 부가 = 사회·운동 중심. ⚠ = 개설 학기 미확인. 과목 설명은 각 대학 공식 카탈로그를 요약했다.</p>
   <h3 class="sub" id="browse">과목 전체 찾아보기</h3>
   <p class="lead">조사해 둔 심리학·성·젠더·인접 과목 <span id="browse-total"></span>개를 학교·분야별로 찾아볼 수 있다. 기본은 지금 고른 파견 학기에 열린 기록이 있거나 개설 학기가 확인되지 않은 과목만 보여 준다. 과목을 누르면 설명·수강 조건·수업 방식·개설 기록이 펼쳐진다. 학교 전체 과목이 아니라 관심 분야로 추려 조사한 목록이다.</p>
-  <div class="cfil"><div class="seg" id="cschool" role="group" aria-label="학교"></div><div class="seg" id="ccat" role="group" aria-label="분야"><button type="button" data-v="all" aria-pressed="true">모든 분야</button><button type="button" data-v="g" aria-pressed="false">성·젠더</button><button type="button" data-v="p" aria-pressed="false">심리학</button></div><input id="cq" type="search" placeholder="코드·과목명·내용 검색" aria-label="과목 검색"><label class="chk"><input id="cmore" type="checkbox"> 다른 학기·1년·미개설 과목도 보기</label></div>
+  <div class="cfil"><div class="seg" id="cschool" role="group" aria-label="학교"></div><div class="seg" id="ccat" role="group" aria-label="분야"><button type="button" data-v="all" aria-pressed="true">모든 분야</button><button type="button" data-v="g" aria-pressed="false">성·젠더</button><button type="button" data-v="p" aria-pressed="false">심리학</button></div><input id="cq" type="search" placeholder="코드·과목명·내용 검색" aria-label="과목 검색"><label class="chk"><input id="cmore" type="checkbox"> 다른 학기·1년·미개설·학위과정 제한 과목도 보기</label></div>
   <p class="small" id="ccount" aria-live="polite"></p>
   <div id="clist"></div>
 </section>
@@ -474,11 +474,12 @@ document.getElementById('browse-total').textContent=ALL.length;
 const CF={s:'all',cat:'all',q:'',more:false};
 const SN={upei:'UPEI',edge:'Edge Hill',sou:'SOU',cpp:'CPP',ncl:'Newcastle'};
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-function bucket(c){if(c.year)return 3;if(c.none)return 4;if(c.se.includes(TERM))return 0;if(!c.se.length)return 1;return 2;}
+const restricted=c=>/학위과정 제한/.test(c.status||'');
+function bucket(c){if(c.year)return 3;if(c.none||restricted(c))return 4;if(c.se.includes(TERM))return 0;if(!c.se.length)return 1;return 2;}
 function badge(c){const b=bucket(c),on=TERM==='fall'?'가을':'봄',off=TERM==='fall'?'봄':'가을';
   if(c.restricted)return '<span class="tb tb-no">학위과정 제한</span>';
  if(b===3)return '<span class="tb tb-no">1년 과목 · 한 학기 제외</span>';
- if(b===4)return '<span class="tb tb-no">2027 공개 분반 미확인</span>';
+ if(b===4)return restricted(c)?'<span class="tb tb-no">학위과정 소속자만</span>':'<span class="tb tb-no">2027 공개 분반 미확인</span>';
  if(c.s==='edge'&&b===0)return `<span class="tb tb-ok">교환 목록: ${on}</span>`;
  if(c.s==='edge'&&b===2)return `<span class="tb tb-off">교환 목록: ${off}</span>`;
  if(b===0)return `<span class="tb tb-ok">${c.se.length>1?'봄·가을':on} 개설 기록</span>`;
@@ -491,7 +492,7 @@ function drawBrowser(){
   &&(!q||[c.code,c.ko,c.en,c.area,c.desc,...(c.tags||[]),...(c.aliases||[])].join(' ').toLowerCase().includes(q)));
  rows.sort((a,b)=>so[a.s]-so[b.s]||bucket(a)-bucket(b)||(b.cats.includes('g')-a.cats.includes('g'))||a.code.localeCompare(b.code));
  const hidden=ALL.filter(c=>(CF.s==='all'||c.s===CF.s)&&(CF.cat==='all'||c.cats.includes(CF.cat))&&bucket(c)>1&&(!q||[c.code,c.ko,c.en,c.area,c.desc,...(c.tags||[]),...(c.aliases||[])].join(' ').toLowerCase().includes(q))).length;
- document.getElementById('ccount').textContent=`${rows.length}과목 표시`+(CF.more?'':` · 다른 학기·1년·미개설 ${hidden}과목 숨김`);
+ document.getElementById('ccount').textContent=`${rows.length}과목 표시`+(CF.more?'':` · 다른 학기·1년·미개설·제한 ${hidden}과목 숨김`);
  document.getElementById('clist').innerHTML=rows.length?rows.map(c=>`<details class="cr" style="--c:${col[c.s]}"><summary><span class="sn">${SN[c.s]}</span><b>${esc(c.code)}</b> ${esc(c.ko)}${c.cats.includes('g')?'<span class="tg tg-core">성·젠더</span>':''}${c.cats.includes('p')?'<span class="tg tg-adj">심리</span>':''} ${badge(c)}</summary><div class="cb">
   <p class="en">${esc(c.en)}${c.area?' · '+esc(c.area):''}</p>
   ${c.desc?`<p><b>공식 설명 요약</b><br>${esc(c.desc)}</p>`:''}${c.aliases?.length?`<p class="small">같은 수업의 교차등재 코드: ${c.aliases.map(esc).join(', ')}</p>`:''}
