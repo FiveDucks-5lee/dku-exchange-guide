@@ -18,19 +18,19 @@ header.top h1{margin:6px 0 4px;font-size:30px;line-height:1.3}
 header.top p{margin:0;color:#c9dbe2}
 header.top .meta{margin-top:14px;font-size:13px;color:#9fc0cd}
 nav.tabs{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
-nav.tabs .wrap{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+nav.tabs .wrap{display:flex;align-items:center;gap:10px}
+nav.tabs .navlinks{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;flex:1;min-width:0;-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 24px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 24px),transparent)}
 nav.tabs a{flex:none;padding:13px 12px;color:var(--muted);text-decoration:none;font-weight:600;font-size:14px;border-bottom:2px solid transparent}
 nav.tabs a:hover{color:var(--ink);border-color:var(--accent)}
 section{padding:30px 0 6px}
 h2{font-size:22px;margin:0 0 6px}
 .lead{color:var(--muted);margin:0 0 16px}
-.termsw{flex:none;margin-left:auto;display:flex;align-items:center;gap:0;padding:7px 0}
+.termsw{flex:none;display:flex;align-items:center;gap:0;padding:7px 0}
 .termsw span{font-size:12.5px;color:var(--muted);margin-right:8px;white-space:nowrap}
 .termsw button{font:inherit;font-size:13px;font-weight:700;padding:5px 12px;border:1px solid var(--line);background:#fff;color:var(--muted);cursor:pointer;white-space:nowrap}
 .termsw button:first-of-type{border-radius:8px 0 0 8px}.termsw button:last-of-type{border-radius:0 8px 8px 0;border-left:0}
 .termsw button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
-.termsw{position:sticky;right:0;background:#fff;padding-left:10px;box-shadow:-10px 0 10px -2px #fff}
-@media(max-width:700px){.termsw span{display:none}.termsw button{padding:5px 9px;font-size:12.5px}}
+@media(max-width:860px){.termsw span{display:none}.termsw button{padding:5px 9px;font-size:12.5px}}
 html[data-term="spring"] .only-fall,html[data-term="fall"] .only-spring{display:none}
 .verdict{background:#fff;border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:10px;padding:18px 20px;margin-top:22px}
 .verdict b{color:var(--accent)}
@@ -70,6 +70,20 @@ table.mx{border-collapse:separate;border-spacing:0;width:100%;min-width:980px}
 .card ul{margin:0;padding-left:18px;font-size:13.5px;line-height:1.55}
 .card .go{margin-top:auto;padding-top:12px;font-size:13.5px;font-weight:700}
 .card .rank{font-size:12px;font-weight:700;color:var(--c)}
+.crsgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.crs{background:#fff;border:1px solid var(--line);border-top:4px solid var(--c);border-radius:12px;padding:14px 16px;display:flex;flex-direction:column}
+.crs h3{margin:0;font-size:17px}
+.crs .acc{margin:4px 0 8px;font-size:12.5px;color:var(--muted);line-height:1.5}
+.crs ul{list-style:none;margin:0;padding:0}
+.crs li{padding:9px 0;border-top:1px solid var(--line)}
+.crs .ch{font-size:14px;line-height:1.45}
+.crs .cw{font-size:13px;line-height:1.5;margin-top:2px}
+.crs .cm{font-size:12px;color:var(--muted);margin-top:3px;line-height:1.45}
+.tg{display:inline-block;margin-left:6px;padding:0 7px;border-radius:9px;font-size:11px;font-weight:700;vertical-align:1px}
+.tg-core{background:#e6f3ea;color:#2f7a4f}.tg-adj{background:#eef0f2;color:#4a5866}.tg-add{background:#fbf1dc;color:#9a6a12}
+.crs .none{font-size:13.5px;padding:10px 12px;background:#f8e7e7;color:#a33a3a;border-radius:8px;margin:4px 0}
+.crs .rest{margin-top:8px;padding-top:8px;border-top:1px dashed var(--line);font-size:12px;color:var(--muted);line-height:1.5}
+.crs .go{margin-top:auto;padding-top:10px;font-size:13px;font-weight:700}
 .cond{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
 .cond div{background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 16px;font-size:14px}
 .cond b{display:block;margin-bottom:2px}
@@ -105,7 +119,7 @@ footer{padding:30px 0 40px;font-size:13px;color:var(--muted)}
   <div class="meta">자료 확인 2026-11-07 · 비용은 장학금 차감 전 1인 계획 예산 · 기준은 각 대학 공식 자료와 단국대 모집표·파견후기</div>
 </div></header>
 <nav class="tabs"><div class="wrap">
-  <a href="#verdict">지금 판단</a><a href="#matrix">기준별 비교</a><a href="#cards">대학별 요약</a><a href="#conditions">순위를 바꾸는 조건</a><a href="#weights">내 기준으로 보기</a><a href="#budget">비용</a><a href="#timeline">일정</a><a href="#more">상세 자료</a>
+  <div class="navlinks"><a href="#verdict">지금 판단</a><a href="#matrix">기준별 비교</a><a href="#courses">들을 수 있는 과목</a><a href="#cards">대학별 요약</a><a href="#conditions">순위를 바꾸는 조건</a><a href="#weights">내 기준으로 보기</a><a href="#budget">비용</a><a href="#timeline">일정</a><a href="#more">상세 자료</a></div>
   <div class="termsw" role="group" aria-label="파견 학기"><span>파견 학기</span><button type="button" data-t="spring" aria-pressed="true">1학기·봄</button><button type="button" data-t="fall" aria-pressed="false">2학기·가을</button></div>
 </div></nav>
 
@@ -134,6 +148,13 @@ footer{padding:30px 0 40px;font-size:13px;color:var(--muted)}
   <div class="legend"><span><span class="rk rk1">1위</span> 가장 유리</span><span><span class="rk rk5">5위</span> 가장 불리</span><span>표는 좌우로 넘길 수 있다</span></div>
   <div class="mx-wrap"><table class="mx" id="mx"></table></div>
   <p class="small">같은 점수는 같은 순위이고, 다음 순위는 건너뛴다(예: 2위 셋 → 다음은 5위). 날씨는 파견 기간에 밖에 나가 놀기 좋은 정도로 매겼고, 기온은 각 도시의 장기 평균을 어림한 값이다. 젠더 환경은 법·학교 제도 기준이며 개인의 실제 경험을 대신하지 않는다. 모집 이력은 단국대 모집표에 나온 정원이고 실제 경쟁률은 공개되지 않는다.</p>
+</section>
+
+<section id="courses">
+  <h2>들을 수 있는 관심 과목</h2>
+  <p class="lead">성·젠더·관계와 가까운 과목 중 <b class="only-spring">1학기(봄)</b><b class="only-fall">2학기(가을)</b>에 열린 기록이 있는 것만 위에 보여 준다. 파견 학기를 바꾸면 목록이 바뀐다. 개설 기록은 지난 학기 시간표 기준이고, 2028년 개설은 아직 공개되지 않았다.</p>
+  <div class="crsgrid" id="crsgrid"></div>
+  <p class="small">핵심 = 성·젠더·관계를 직접 다룸 · 인접 = 일부 겹침 · 부가 = 사회·운동 중심. ⚠ = 개설 학기 미확인. 과목 설명은 각 대학 공식 카탈로그를 요약했다.</p>
 </section>
 
 <section id="cards">
@@ -344,8 +365,56 @@ function drawMatrix(){
  document.getElementById('wreset').addEventListener('click',e=>{e.preventDefault(); w={...def}; for(const c of C){document.getElementById('w-'+c.k).value=w[c.k];document.getElementById('wv-'+c.k).textContent=w[c.k];} try{localStorage.removeItem(KEY)}catch(err){} calc();});
  window.recalc=calc; calc();
 })();
+// 과목 목록: t = 학기별 개설 근거(spring/fall), year = 1년 과목(한 학기 파견 제외), none = 2027 미개설
+const CRS={
+ upei:{access:'정규 과목에서 선택 · 교환학생 일괄 제한은 확인 안 됨 · 좌석과 수강 승인(CRF)은 따로 필요',link:'upei.html#s-5',list:[
+  {code:'DSJS2050',ko:'성과 문화',en:'Sex and Culture',tag:'핵심',what:'성적 정체성, 트랜스·인터섹스, 성의 허용과 금기가 북미 문화에서 어떻게 정해지는지',t:{spring:'2025 겨울학기 대면(월·수)'},req:'선수과목 없음'},
+  {code:'PSY3910',ko:'여성과 젠더의 심리학',en:'Psychology of Women and Gender',tag:'인접',what:'여성의 생애 발달, 젠더 사회화가 개인·관계에 미치는 영향',t:{spring:'2025 대면 · 2026 온라인'},req:'심리학 선수과목 또는 교수 허가'},
+  {code:'DSJS3140',ko:'남성성들',en:'Masculinities',tag:'인접',what:'남성성이 어떻게 만들어지고 평가되는지, 여러 남성성의 충돌',t:{spring:'2026 겨울학기 대면(월)'},req:'2학년 이상 또는 교수 허가'},
+  {code:'PSY4350',ko:'젠더와 섹슈얼리티',en:'Gender and Sexuality',tag:'핵심',what:'젠더·섹슈얼리티의 개인·관계·사회적 구성을 심리학 연구로 검토하는 4학년 세미나',t:{fall:'2025·2026 가을 대면 세미나'},req:'심리학 선수과목 여러 개 또는 교수 허가'},
+  {code:'DSJS2420',ko:'사랑과 섹슈얼리티의 철학',en:'Philosophies of Love and Sexuality',tag:'핵심',what:'사랑과 성의 의미, 친밀한 관계의 윤리, 성의 상품화',t:{fall:'2025 가을 대면(화·목)'},req:'선수과목 없음'},
+ ]},
+ edge:{access:'교환학생 전용 목록 안에서만 선택 · 6개를 지망해 3개가 배정된 후기 · 수업 방식은 목록에 안 나옴',noneMsg:{fall:'골라 둔 성·젠더 과목은 가을에 없다. 가을 교환 목록에는 발달·정신건강 같은 넓은 심리 과목이 있다(가이드북 과목 사전 참고).'},link:'edgehill.html#s-5',list:[
+  {code:'SPY3145',ko:'아동·청소년의 섹슈얼리티',en:'Childhood Sexuality',tag:'관련',what:'청소년이 이성애 규범 속에서 자기 섹슈얼리티를 이해하고 성적 정체성을 만드는 과정',t:{spring:'교환 목록에 봄(Semester 2) 표시'},req:'사회과학 3학년 과목'},
+  {code:'REL3007',ko:'젠더, 섹슈얼리티와 기독교',en:'Gender, Sexuality and Christianity',tag:'관련',what:'기독교 전통의 젠더·섹슈얼리티, 페미니스트·퀴어 신학, 당사자 경험',t:{spring:'교환 목록에 봄(Semester 2) 표시'},req:'종교학 3학년 과목'},
+  {code:'ECW3000',ko:'섹슈얼리티, 젠더와 정체성',en:'Sexualities, Genders and Identities',tag:'관련',what:'문학·창작에서 동성 욕망과 젠더 다양성이 표현되는 방식',year:true,req:'영어·창작 3학년 과목'},
+ ]},
+ sou:{access:'정규 시간표에서 선택 · 교환학생 제한 여부는 따로 확인 · 한 쿼터에 보통 3~4과목',list:[
+  {code:'PSY369',ko:'인간의 성',en:'Human Sexuality',tag:'핵심',what:'심리학 중심으로 생물·사회·문화 요인까지 인간의 성을 다룸',t:{spring:'개설 쿼터 미확인',fall:'개설 쿼터 미확인'},req:'선수과목 없음',unsure:true},
+  {code:'GSWS310',ko:'교차성',en:'Intersectionality',tag:'부가',what:'인종·젠더·계급·성·장애가 맞물려 차별을 만드는 방식',t:{spring:'2026·2027 겨울쿼터 대면'},req:'선수과목 없음'},
+  {code:'GSWS410',ko:'행동으로 옮기는 페미니즘·퀴어 이론',en:'Feminist and Queer Theory in Action',tag:'부가',what:'이론 공부와 30시간 집단 프로젝트 참여',t:{spring:'2025~2027 겨울쿼터 대면'},req:'GSWS201, 3학년 이상 또는 교수 승인'},
+ ]},
+ cpp:{access:'정규 시간표에서 선택 · 관련 과목 상당수가 온라인 분반 · 미국 학생비자는 온라인 수업 인정에 제한이 있어 확인 필요',list:[
+  {code:'PSY4455',ko:'인간의 성: 관계',en:'Human Sexuality: Relationships',tag:'핵심 후보',what:'성과 친밀한 관계의 심리학(최신 강의계획서는 미확보)',t:{spring:'2026·2027 봄 실시간 온라인',fall:'2025 가을 대면 → 2026 가을 비동기 온라인'},req:'3학년 이상'},
+  {code:'PHL3400',ko:'섹슈얼리티에 관한 현재의 논쟁',en:'Current Debates About Sexuality',tag:'핵심',what:'동성혼·복혼·포르노·성매매 등 성도덕 논쟁을 철학으로 따져 봄',t:{spring:'매년 봄 대면+온라인 혼합(화)',fall:'매년 가을 대면+온라인 혼합(목)'},req:'교양 필수 이수 조건 · 교환학생 인정 확인'},
+  {code:'PSY3321',ko:'정체성 심리학',en:'Psychology of Identity',tag:'인접',what:'자기 이해와 집단 속 정체성 형성(세부 내용 미확인)',t:{spring:'2026·2027 봄 실시간 온라인'},req:'심리학 입문'},
+  {code:'EWS4070',ko:'다양한 젠더·성적 정체성',en:'Diverse Gender and Sexual Identities',tag:'인접',what:'젠더·섹슈얼리티가 규제되고 저항되는 방식, 인종·계급과의 관계',t:{spring:'2026·2027 봄 비동기 온라인'},req:'선수조건 미확인'},
+  {code:'SOC3328',ko:'젠더와 섹슈얼리티',en:'Gender and Sexuality',tag:'인접',what:'젠더·섹슈얼리티의 사회학(세부 내용 미확인)',t:{spring:'매년 봄 혼합 또는 비동기 온라인',fall:'매년 가을 혼합 또는 비동기 온라인'},req:'사회학 입문'},
+ ]},
+ ncl:{access:'정규 Handbook에서 선택 · 교환학생 제한 여부는 따로 확인 · Gender and Sexuality Studies 부전공은 있음',list:[
+  {code:'SOCA1050',ko:'청년·젠더·범죄',en:'Youth, Gender and Crime',tag:'인접',what:'청년의 삶에서 젠더·범죄·불평등이 작용하는 사회적 요인',t:{fall:'2027 Semester 2 대면·혼합·온라인'},req:'선수과목 없음'},
+  {code:'AHIS2560',ko:'고대의 젠더와 섹슈얼리티',en:'Gender and Sexuality in Antiquity',tag:'인접',what:'고대 그리스·로마의 욕망·혼인·동성관계',none:true,req:''},
+  {code:'SOCA2700',ko:'젠더·종교·권력',en:'Gender, Religion and Power',tag:'인접',what:'종교 전통 속 젠더와 권력',none:true,req:''},
+  {code:'SCRN3500',ko:'영상 속 성과 젠더',en:'Screening Sex and Gender',tag:'인접',what:'영화·TV의 젠더·섹슈얼리티 재현',none:true,req:''},
+ ]},
+};
+function drawCourses(){
+ const other=TERM==='fall'?'spring':'fall', on=TERM==='fall'?'가을':'봄', off=TERM==='fall'?'봄':'가을';
+ document.getElementById('crsgrid').innerHTML=ORDER.map(u=>{const d=CRS[u.id];
+  const now=d.list.filter(c=>c.t&&c.t[TERM]), later=d.list.filter(c=>c.t&&!c.t[TERM]&&c.t[other]), yr=d.list.filter(c=>c.year), nn=d.list.filter(c=>c.none);
+  const li=c=>`<li><div class="ch"><b>${c.code}</b> ${c.ko}<span class="tg tg-${c.tag==='핵심'||c.tag==='핵심 후보'?'core':c.tag==='부가'?'add':'adj'}">${c.tag}</span></div><div class="cw">${c.what}</div><div class="cm">${c.unsure?'⚠ ':''}${c.t[TERM]}${c.req?' · '+c.req:''}</div></li>`;
+  let h=`<article class="crs" style="--c:${u.c}"><h3>${u.name}</h3><p class="acc">${d.access}</p>`;
+  h+=now.length?`<ul>${now.map(li).join('')}</ul>`:`<p class="none">${(d.noneMsg&&d.noneMsg[TERM])||on+' 학기에 열리는 관련 과목을 찾지 못했다.'}</p>`;
+  const rest=[];
+  if(later.length) rest.push(`${off}에만 열림: `+later.map(c=>`${c.code} ${c.ko}`).join(', '));
+  if(yr.length) rest.push(`1년 과목이라 한 학기 파견은 제외: `+yr.map(c=>`${c.code} ${c.ko}`).join(', '));
+  if(nn.length) rest.push(`2027 미개설: `+nn.map(c=>`${c.code} ${c.ko}`).join(', '));
+  if(rest.length) h+=`<div class="rest">${rest.map(x=>`<div>${x}</div>`).join('')}</div>`;
+  if(d.link) h+=`<a class="go" href="${d.link}">가이드북 과목 사전 전체 →</a>`;
+  return h+'</article>';}).join('');
+}
 // term toggle
-function setTerm(t){TERM=t; try{localStorage.setItem(TERMKEY,t)}catch(e){} document.documentElement.dataset.term=t; document.querySelectorAll('.termsw button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.t===t))); drawMatrix(); window.recalc();}
+function setTerm(t){TERM=t; try{localStorage.setItem(TERMKEY,t)}catch(e){} document.documentElement.dataset.term=t; document.querySelectorAll('.termsw button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.t===t))); drawMatrix(); drawCourses(); window.recalc();}
 document.querySelectorAll('.termsw button').forEach(b=>b.addEventListener('click',()=>setTerm(b.dataset.t)));
 setTerm(TERM);
 // cost table
