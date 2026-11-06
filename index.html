@@ -169,7 +169,7 @@ footer{padding:30px 0 40px;font-size:13px;color:var(--muted)}
   <div class="scale"><span><b>17~20</b> 확실한 장점, 신경 쓸 일이 거의 없음</span><span><b>13~16</b> 좋음, 작은 불편 정도</span><span><b>10~12</b> 보통, 감수할 만함</span><span><b>7~9</b> 눈에 띄는 부담, 따로 대비해야 함</span><span><b>0~6</b> 큰 부담, 계획이 흔들림</span></div>
   <div class="legend"><span><span class="rk rk1">1위</span> 가장 유리</span><span><span class="rk rk5">5위</span> 가장 불리</span><span>표는 좌우로 넘길 수 있다</span></div>
   <div class="mx-wrap"><table class="mx" id="mx"></table></div>
-<details class="small"><summary>파견 기간 표시 기준</summary><p>월 범위는 현지 수업·시험 기간을 요약했다. 오리엔테이션과 기숙사 입퇴실일은 별도다. SOU의 1학기 파견 비교는 <b>Winter 한 쿼터(1~3월)</b> 기준이며 현지 Spring 쿼터(3~6월)와 다르다. 뉴캐슬은 공개된 2028년 일정, 나머지는 현재 공개된 2026~2027년 일정의 월 범위를 참고했다.</p><p><a href="https://calendar.upei.ca/current/chapter/4-the-university-of-prince-edward-island-dates/" target="_blank" rel="noopener">UPEI 학사일정</a> · <a href="edgehill.html#s-2">Edge Hill 일정·파견 안내</a> · <a href="https://sou.edu/student-services/wp-content/uploads/sites/30/2026/06/2026-2027-SOU-Academic-Calendar.pdf" target="_blank" rel="noopener">SOU 학사일정</a> · <a href="https://www.cpp.edu/academic-programs/academic-calendar/documents/2026-27-academic-calendar.pdf" target="_blank" rel="noopener">CPP 학사일정</a> · <a href="newcastle.html#s-5">Newcastle 학사일정</a></p></details>
+<details class="small"><summary>파견 기간 표시 기준</summary><p>기존 입퇴실·출국 사례와 학사일정을 바탕으로 추정한 체류 기간이다. UPEI·Edge Hill은 기존 파견·기숙사 안내, 뉴캐슬은 2027년 기숙사 기간을 참고했다. CPP·SOU는 수업·시험 일정에 입국·정착 여유 약 1주를 더하고 주 단위로 반올림했다. 별도 여행은 포함하지 않았다.</p><p><a href="https://calendar.upei.ca/current/chapter/4-the-university-of-prince-edward-island-dates/" target="_blank" rel="noopener">UPEI 학사일정</a> · <a href="edgehill.html#s-2">Edge Hill 일정·파견 안내</a> · <a href="https://sou.edu/student-services/wp-content/uploads/sites/30/2026/06/2026-2027-SOU-Academic-Calendar.pdf" target="_blank" rel="noopener">SOU 학사일정</a> · <a href="https://www.cpp.edu/academic-programs/academic-calendar/documents/2026-27-academic-calendar.pdf" target="_blank" rel="noopener">CPP 학사일정</a> · <a href="newcastle.html#s-5">Newcastle 학사일정</a></p></details>
   <p class="small">같은 점수는 같은 순위이고, 다음 순위는 건너뛴다(예: 2위 셋 → 다음은 5위). 날씨는 파견 기간에 밖에 나가 놀기 좋은 정도로 매겼고, 기온은 각 도시의 장기 평균을 어림한 값이다. 젠더 환경은 법·학교 제도 기준이며 개인의 실제 경험을 대신하지 않는다. 모집 이력은 단국대 모집표에 나온 정원이고 실제 경쟁률은 공개되지 않는다.</p>
 </section>
 
@@ -371,18 +371,18 @@ const band=s=>s>=17?'b5':s>=13?'b4':s>=10?'b3':s>=7?'b2':'b1';
 function rk(r){return `<span class="rk rk${r}">${r}위</span>`}
 // matrix
 const ORDER=[...U].sort((a,b)=>a.rank-b.rank);
-// 한국 파견 학기 기준. 월 범위는 아래 학사일정 근거에 따른 수업·시험 기간의 개요다.
+// 한국 파견 학기 기준. 기존 파견·입퇴실 사례와 학사일정으로 추정한 체류 범위.
 const DISPATCH_PERIOD={
- upei:{spring:'Winter · 1~4월',fall:'Fall · 9~12월'},
- edge:{spring:'Semester 2 · 1~5월',fall:'Semester 1 · 9~12월'},
- sou:{spring:'Winter · 1~3월',fall:'Fall · 9~12월'},
- cpp:{spring:'Spring · 1~5월',fall:'Fall · 8~12월'},
- ncl:{spring:'Semester 1 · 2~6월',fall:'Semester 2 · 8~11월'}
+ upei:{spring:['1월 초~4월 말',16],fall:['9월 초~12월 하순',16]},
+ edge:{spring:['1월 중순~5월 중순',17],fall:['9월 하순~12월 하순',13]},
+ sou:{spring:['1월 초~3월 하순',12],fall:['9월 중순~12월 중순',12]},
+ cpp:{spring:['1월 중순~5월 하순',18],fall:['8월 중순~12월 중순',17]},
+ ncl:{spring:['2월 초~6월 초',17],fall:['8월 초~11월 말',16]}
 };
 
 function drawMatrix(){
  const order=ORDER;
- let h='<thead><tr><th>기준</th>'+order.map(u=>`<th><span class="bar" style="background:${u.c}"></span>${u.name}<small class="dispatch-period">${u.term}<br><span class="dispatch-months">${DISPATCH_PERIOD[u.id][TERM]}</span></small><small>${u.loc}</small></th>`).join('')+'</tr></thead><tbody>';
+ let h='<thead><tr><th>기준</th>'+order.map(u=>`<th><span class="bar" style="background:${u.c}"></span>${u.name}<small class="dispatch-period">${DISPATCH_PERIOD[u.id][TERM][0]}<br><span class="dispatch-months">약 ${DISPATCH_PERIOD[u.id][TERM][1]}주</span></small><small>${u.loc}</small></th>`).join('')+'</tr></thead><tbody>';
  for(const g of G){h+=`<tr class="grp"><td colspan="${order.length+1}">${g.g}</td></tr>`;
   for(const c of g.items){h+=`<tr><th>${c.t}<small>${c.s}</small><span class="rng">점수 폭 ${c.r[0]}~${c.r[1]} · ${c.imp}</span></th>`+order.map(u=>{const v=val(c,u.id);return `<td>${rk(rankOf(c,u.id))}<span class="pt">${v[0]}<small>/20</small></span><div class="sbar"><i class="${band(v[0])}" style="width:${Math.max(v[0]*5,3)}%"></i></div><div><b>${v[1]}</b></div><div class="small">${v[2]}</div></td>`}).join('')+'</tr>';}}
  h+='</tbody>'; document.getElementById('mx').innerHTML=h;
