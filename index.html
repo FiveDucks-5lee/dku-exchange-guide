@@ -52,6 +52,7 @@ table.mx{border-collapse:separate;border-spacing:0;width:100%;min-width:980px}
 .mx td .sig{margin-bottom:4px}
 .rk{display:inline-block;min-width:40px;text-align:center;padding:1px 8px;border-radius:11px;font-weight:800;font-size:12.5px;margin-bottom:4px}
 .rk1{background:#1f6b45;color:#fff}.rk2{background:#cfe9d8;color:#1f5a3a}.rk3{background:#eef0f2;color:#4a5866}.rk4{background:#f8e3cf;color:#8a4b12}.rk5{background:#a33a3a;color:#fff}
+.mx thead th .tot{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin-bottom:4px}.mx thead th .tot b{color:var(--ink);font-size:15px}.mx thead th .tot .rk{margin:0 4px 0 0}.mx thead th .tot small{display:inline;font-size:11.5px}
 .pt{display:inline-block;margin-left:6px;font-weight:800;font-size:13px;color:var(--ink)}
 .sbar{height:5px;background:#edf0f3;border-radius:3px;margin:2px 0 7px;overflow:hidden}.sbar i{display:block;height:100%;border-radius:3px}
 .sbar .b5{background:#2f7a4f}.sbar .b4{background:#6f9a7c}.sbar .b3{background:#9aa5b1}.sbar .b2{background:#c27a2c}.sbar .b1{background:#a33a3a}
@@ -165,7 +166,7 @@ footer{padding:30px 0 40px;font-size:13px;color:var(--muted)}
 
 <section id="matrix">
   <h2>기준별 비교</h2>
-  <p class="lead">칸마다 <b>20점 만점</b>으로 점수를 매겼다. 한 기준 안에서 줄 세운 게 아니라, 그 장단점이 <b>교환 준비와 생활 전체</b>에 얼마나 영향을 주는지로 매겼다. 그래서 기준마다 쓰는 점수 폭이 다르다. 예를 들어 놀거리는 부족해도 수업·생활엔 지장이 적어 10~18점 안에서 매기고, 비용·같이 붙을 가능성처럼 계획 자체를 흔드는 기준은 넓게 쓴다. 순위는 점수에서 자동으로 정했다(같은 점수면 같은 순위). 위쪽 메뉴의 <b>파견 학기</b>를 바꾸면 날씨·모집 이력·과목처럼 학기에 따라 달라지는 칸이 바뀐다. 지금은 <b class="only-spring">1학기(봄)</b><b class="only-fall">2학기(가을)</b> 기준이다.</p>
+  <p class="lead">학교 열은 <b>총점이 높은 순서</b>로 놓인다. 총점은 지금 고른 파견 학기와 아래 "내 기준으로 보기"의 중요도로 계산하고, 둘 중 하나를 바꾸면 순서도 바로 바뀐다. 칸마다 <b>20점 만점</b>으로 점수를 매겼다. 한 기준 안에서 줄 세운 게 아니라, 그 장단점이 <b>교환 준비와 생활 전체</b>에 얼마나 영향을 주는지로 매겼다. 그래서 기준마다 쓰는 점수 폭이 다르다. 예를 들어 놀거리는 부족해도 수업·생활엔 지장이 적어 10~18점 안에서 매기고, 비용·같이 붙을 가능성처럼 계획 자체를 흔드는 기준은 넓게 쓴다. 순위는 점수에서 자동으로 정했다(같은 점수면 같은 순위). 위쪽 메뉴의 <b>파견 학기</b>를 바꾸면 날씨·모집 이력·과목처럼 학기에 따라 달라지는 칸이 바뀐다. 지금은 <b class="only-spring">1학기(봄)</b><b class="only-fall">2학기(가을)</b> 기준이다.</p>
   <div class="scale"><span><b>17~20</b> 확실한 장점, 신경 쓸 일이 거의 없음</span><span><b>13~16</b> 좋음, 작은 불편 정도</span><span><b>10~12</b> 보통, 감수할 만함</span><span><b>7~9</b> 눈에 띄는 부담, 따로 대비해야 함</span><span><b>0~6</b> 큰 부담, 계획이 흔들림</span></div>
   <div class="legend"><span><span class="rk rk1">1위</span> 가장 유리</span><span><span class="rk rk5">5위</span> 가장 불리</span><span>표는 좌우로 넘길 수 있다</span></div>
   <div class="mx-wrap"><table class="mx" id="mx"></table></div>
@@ -381,8 +382,11 @@ const DISPATCH_PERIOD={
 };
 
 function drawMatrix(){
- const order=ORDER;
- let h='<thead><tr><th>기준</th>'+order.map(u=>`<th><span class="bar" style="background:${u.c}"></span>${u.name}<small class="dispatch-period">${DISPATCH_PERIOD[u.id][TERM][0]}<br><span class="dispatch-months">약 ${DISPATCH_PERIOD[u.id][TERM][1]}주</span></small><small>${u.loc}</small></th>`).join('')+'</tr></thead><tbody>';
+ const W=window.WT||Object.fromEntries(C.map(c=>[c.k,1]));
+ const max=C.reduce((a,c)=>a+20*W[c.k],0);
+ const ranked=U.map(u=>({u,s:C.reduce((a,c)=>a+val(c,u.id)[0]*W[c.k],0)})).sort((a,b)=>b.s-a.s||a.u.rank-b.u.rank);
+ const order=ranked.map(x=>x.u), TOT=Object.fromEntries(ranked.map((x,i)=>[x.u.id,[x.s,1+ranked.filter(y=>y.s>x.s).length]]));
+ let h='<thead><tr><th>기준<small>열은 총점 높은 순</small></th>'+order.map(u=>`<th><span class="bar" style="background:${u.c}"></span><span class="tot">${rk(TOT[u.id][1])} 총점 <b>${TOT[u.id][0]}</b><small>/${max}</small></span>${u.name}<small class="dispatch-period">${DISPATCH_PERIOD[u.id][TERM][0]}<br><span class="dispatch-months">약 ${DISPATCH_PERIOD[u.id][TERM][1]}주</span></small><small>${u.loc}</small></th>`).join('')+'</tr></thead><tbody>';
  for(const g of G){h+=`<tr class="grp"><td colspan="${order.length+1}">${g.g}</td></tr>`;
   for(const c of g.items){h+=`<tr><th>${c.t}<small>${c.s}</small><span class="rng">점수 폭 ${c.r[0]}~${c.r[1]} · ${c.imp}</span></th>`+order.map(u=>{const v=val(c,u.id);return `<td>${rk(rankOf(c,u.id))}<span class="pt">${v[0]}<small>/20</small></span><div class="sbar"><i class="${band(v[0])}" style="width:${Math.max(v[0]*5,3)}%"></i></div><div><b>${v[1]}</b></div><div class="small">${v[2]}</div></td>`}).join('')+'</tr>';}}
  h+='</tbody>'; document.getElementById('mx').innerHTML=h;
@@ -397,6 +401,7 @@ function drawMatrix(){
  const f=document.getElementById('wform');
  f.innerHTML=C.map(c=>`<div><label for="w-${c.k}"><span>${c.t}</span><span id="wv-${c.k}">${w[c.k]}</span></label><input type="range" min="0" max="3" step="1" id="w-${c.k}" value="${w[c.k]}"></div>`).join('')+'<div class="note">기본값은 모두 1이다. 기준별 영향 크기는 이미 점수 폭에 들어가 있으니, 개인적으로 더 중요하거나 덜 중요한 것만 바꾸면 된다. 점수는 위에서 고른 파견 학기 기준이다. <a href="#weights" id="wreset">기본값으로</a></div>';
  function calc(){
+  window.WT=w; if(document.getElementById('mx').innerHTML) drawMatrix();
   const max=C.reduce((a,c)=>a+20*w[c.k],0);
   const sc=U.map(u=>({u,s:C.reduce((a,c)=>a+val(c,u.id)[0]*w[c.k],0)})).sort((a,b)=>b.s-a.s||a.u.rank-b.u.rank);
   document.getElementById('scores').innerHTML=sc.map((x,i)=>`<div style="--c:${x.u.c}">${i+1}. ${x.u.name} <b>${x.s}</b><span class="small"> / ${max}</span></div>`).join('');
