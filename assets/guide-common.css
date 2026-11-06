@@ -1,0 +1,24 @@
+/* 세 가이드북 공통: 본문 폭·줄 간격·목차·바로가기 통일 */
+article p,article li{line-height:1.85}
+article .chapter>p,article .chapter>ul,article .chapter>ol,article .chapter>h3,article .chapter>h4,article .chapter>h5,article .chapter>blockquote,article .chapter>.notice,article p.intro{max-width:720px}
+article .chapter>p.small,article .chapter>.src,article .chapter>.sources{max-width:none}
+.guide-nav{display:flex;flex-wrap:wrap;gap:6px 14px;margin:10px 0 16px;font-size:14px}
+.notice.quick{max-width:720px}
+.notice.quick .guide-jumps{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 6px}
+.notice.quick .guide-jumps a{display:inline-block;padding:4px 11px;border:1px solid var(--line,#dbe2e9);border-radius:16px;background:#fff;font-size:13.5px;text-decoration:none}
+.notice.quick p.small{margin:4px 0 0}
+#toc{max-width:720px}
+#toc .toc-t{font-weight:800;margin-bottom:6px}
+#toc .l2{padding:3px 0}
+#toc .l2 a{font-weight:600}
+#toc details{margin:0 0 4px 16px}
+#toc details summary{font-size:12.5px;color:var(--muted,#5b6a7b);cursor:pointer}
+#toc .l3{padding:2px 0 2px 10px;font-size:13.5px}
+#toc .l2:nth-last-of-type(-n+3) a{color:var(--muted,#5b6a7b)}
+.infobox table th{white-space:nowrap}
+@media(max-width:720px){article .chapter>p,article p.intro{max-width:none}}
+#toc details{display:none}
+#toc{column-count:2;column-gap:28px}
+#toc .toc-t{column-span:all}
+#toc .l2{break-inside:avoid}
+@media(max-width:600px){#toc{column-count:1}}
