@@ -30,6 +30,7 @@ figure.guide-photo{margin:0;min-width:0;background:#f4f7f7;border:1px solid #dbe
 .photo-dialog figure{margin:0}
 .photo-dialog img{display:block;max-width:100%;width:100%;height:min(68vh,760px);object-fit:contain;border:0;border-radius:0;background:#0b202b}
 .photo-dialog figcaption{padding:14px 20px;color:#eff5f7;font-size:14px;line-height:1.6;margin:0;max-height:18vh;overflow:auto}
+.photo-dialog figcaption>strong{display:block;margin-bottom:5px;font-size:16px}
 .photo-dialog figcaption .photo-credit,.photo-dialog figcaption a{color:#bbd4df}
 .photo-dialog-controls{display:flex;gap:8px;align-items:center}
 .photo-dialog-close{margin-left:12px}
